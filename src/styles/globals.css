@@ -3,7 +3,7 @@
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
@@ -35,8 +35,18 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
+input {
+  background-color: transparent;
+  border: 1px solid #ccc;
+}
+
+input::placeholder,
+select::placeholder {
+  font-weight: 400;
+}
+
+@media (prefers-color-scheme: light) {
   html {
-    color-scheme: dark;
+    color-scheme: light;
   }
 }

@@ -1,0 +1,46 @@
+.modalContainer {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #00000050;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContent {
+  z-index: 2;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #fff;
+  min-width: 300px;
+}
+
+.modalTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 12px;
+}
+
+.modalTitle h3 {
+  font-size: 24px;
+}
+
+.modalCloseIcon {
+  cursor: pointer;
+  transition: all 200ms ease;
+  border-radius: 4px;
+}
+
+.modalCloseIcon:hover {
+  background-color: #e2e2e2;
+}
+
+.modalActions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
