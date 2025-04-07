@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import ReactDOM from "react-dom";
 import ModalStyles from "@/styles/Modal.module.css";
 import { X } from "lucide-react";
 import { ModalProps } from "@/types/common";
@@ -31,37 +32,43 @@ const Modal = ({
 
   if (!opened) return null;
 
-  return (
-    <div className={ModalStyles.modalContainer} onClick={handleClickOutside}>
-      <div
-        className={ModalStyles.modalContent}
-        role="dialog"
-        aria-modal
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className={ModalStyles.modalTitle}>
-          {title && <h3>{title}</h3>}
-          <X
-            size={20}
-            className={ModalStyles.modalCloseIcon}
-            onClick={onCancel}
-          />
-        </div>
-        {content ? (
-          content
-        ) : (
-          <div>
-            <p>{description}</p>
+  const modalRoot = document.getElementById("modal-root");
 
-            <div className={ModalStyles.modalActions}>
-              <button onClick={onCancel}>Cancel</button>
-              <button onClick={onConfirm}>Confirm</button>
-            </div>
+  if (modalRoot)
+    return ReactDOM.createPortal(
+      <div className={ModalStyles.modalContainer} onClick={handleClickOutside}>
+        <div
+          className={ModalStyles.modalContent}
+          role="dialog"
+          aria-modal
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className={ModalStyles.modalTitle}>
+            {title && <h3>{title}</h3>}
+            <X
+              size={20}
+              className={ModalStyles.modalCloseIcon}
+              onClick={onCancel}
+            />
           </div>
-        )}
-      </div>
-    </div>
-  );
+          {content ? (
+            content
+          ) : (
+            <div>
+              <p>{description}</p>
+
+              <div className={ModalStyles.modalActions}>
+                <button onClick={onCancel}>Cancel</button>
+                <button onClick={onConfirm}>Confirm</button>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>,
+      modalRoot
+    );
+
+  return null;
 };
 
 export default Modal;

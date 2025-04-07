@@ -28,7 +28,6 @@ const StudentListComponent = () => {
 
   const handleAddStudent = () => {
     setCreateModalOpened(true);
-    setStudentListSearchQuery({ ...studentListSearchQuery, searchText: "hi" });
   };
 
   const handleCancelCreate = () => {
@@ -41,8 +40,6 @@ const StudentListComponent = () => {
       pageNumber: val,
     });
   };
-
-  console.log(studentListSearchQuery);
 
   return (
     <div style={{ position: "relative" }}>
