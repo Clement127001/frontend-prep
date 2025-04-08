@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { Plus } from "lucide-react";
 import StudentListContainer from "@/components/StudentListContainer";
@@ -7,6 +7,7 @@ import { useQueryState } from "@/hooks/useQueryState";
 import { StudentListSearchQueryType } from "@/types/studentList";
 import HomeModule from "@/styles/Home.module.css";
 import Pagination from "@/components/Pagination";
+import useToast from "@/hooks/useToast";
 
 //TODO: remove the dummy value
 const TOTOAL_PAGE = 10;
@@ -23,6 +24,8 @@ const StudentListComponent = () => {
       pageNumber: 1,
       refetchStudentList: false,
     });
+
+  const { ToastComponent, showToast } = useToast({ position: "bottom-right" });
 
   const [createModalOpened, setCreateModalOpened] = useState<boolean>(false);
 
@@ -41,8 +44,17 @@ const StudentListComponent = () => {
     });
   };
 
+  useEffect(() => {
+    showToast({
+      type: "failure",
+      title: "Successs",
+      duration: 100000,
+      description: "This is a success message!",
+    });
+  }, []);
+
   return (
-    <div style={{ position: "relative" }}>
+    <div>
       <div className={HomeModule.container}>
         <div className={HomeModule.header}>
           <h1>Student list</h1>
@@ -73,6 +85,7 @@ const StudentListComponent = () => {
           onCancel={handleCancelCreate}
         />
       )}
+      {ToastComponent}
     </div>
   );
 };
