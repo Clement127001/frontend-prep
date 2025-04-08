@@ -1,0 +1,20 @@
+.studentTabContianer {
+  padding: 10px;
+  outline: 2px solid;
+  margin-bottom: 200px;
+}
+
+.tabsContainer {
+  display: flex;
+  gap: 12px;
+  list-style: none;
+}
+
+.tab {
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+}
+
+.activeTab {
+  border: 1px solid #000;
+}

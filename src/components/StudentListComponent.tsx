@@ -8,6 +8,7 @@ import { StudentListSearchQueryType } from "@/types/studentList";
 import HomeModule from "@/styles/Home.module.css";
 import Pagination from "@/components/Pagination";
 import useToast from "@/hooks/useToast";
+import StudentTabsContiner from "@/components/studentTab/StudentTabsContainer";
 
 //TODO: remove the dummy value
 const TOTOAL_PAGE = 10;
@@ -74,6 +75,8 @@ const StudentListComponent = () => {
           totalPages={TOTOAL_PAGE}
           handleChangePageNumber={handleChangePageNumber}
         />
+
+        <StudentTabsContiner />
       </div>
 
       {createModalOpened && (

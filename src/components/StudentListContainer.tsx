@@ -24,22 +24,23 @@ const StudentListContainer = memo(
   }: {
     studentListSearchQuery: StudentListSearchQueryType;
   }) => {
+    //FIXME: dummy fetch only for name sake
     //actual data fetching, with having the query
     // const [isLoading, setIsLoading] = useState<boolean>(false);
     // const [error, setError] = useState<string | null>(null);
-    const { searchText, refetchStudentList, pageNumber } =
-      studentListSearchQuery;
     // const [studentList, setStudentList] = useState<StudentType[] | null>(
     //   studentData
     // );
+
+    const { searchText, refetchStudentList, pageNumber } =
+      studentListSearchQuery;
+
     const [editId, setEditId] = useState<string | null>(null);
     const [deleteId, setDeleteId] = useState<string | null>(null);
     const [editModalOpened, setEditModalOpened] = useState<boolean>(false);
     const [deleteModalOpened, setDeleteModalOpened] = useState<boolean>(false);
 
     const debouncedSearchText = useDebounce(searchText, 300);
-
-    console.log("refetching");
 
     const handleEdit = useCallback((studentId: string) => {
       setEditId(studentId);
@@ -61,6 +62,7 @@ const StudentListContainer = memo(
       setDeleteId(null);
     };
 
+    //FIXME: dummy fetch only for name sake
     // const fetchUserList = async () => {
     //   try {
     //     setIsLoading(true);
@@ -114,6 +116,7 @@ const StudentListContainer = memo(
       }
     };
 
+    //FIXME: dummy fetch only for name sake
     //for intial fetching
     // useEffect(() => {
     //   fetchUserList();
