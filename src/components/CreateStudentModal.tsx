@@ -6,13 +6,16 @@ import { defaultStudentValues } from "@/utils/data";
 const CreateStudentModal = ({
   opened,
   onCancel,
+  onCreateStudent,
 }: {
   opened: boolean;
   onCancel: () => void;
+  onCreateStudent: () => void;
 }) => {
   const handleAddSubmit = (data: CreateStudentType) => {
     console.log(data);
     onCancel();
+    onCreateStudent();
   };
 
   return (

@@ -19,8 +19,6 @@ const useToast = ({ position }: { position: ToastPostion }) => {
     }, toastProps.duration);
   }, []);
 
-  console.log("classname : ", `${ToastStyles[position]}`);
-
   const ToastComponent = toast ? (
     <div className={`${ToastStyles[position]}`}>
       <Toast {...toast} onClose={() => setToast(null)} />

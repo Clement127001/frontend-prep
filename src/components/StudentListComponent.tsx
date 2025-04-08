@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import dynamic from "next/dynamic";
 import { Plus } from "lucide-react";
 import StudentListContainer from "@/components/StudentListContainer";
@@ -25,7 +25,7 @@ const StudentListComponent = () => {
       refetchStudentList: false,
     });
 
-  const { ToastComponent, showToast } = useToast({ position: "bottom-right" });
+  const { ToastComponent } = useToast({ position: "bottom-right" });
 
   const [createModalOpened, setCreateModalOpened] = useState<boolean>(false);
 
@@ -44,14 +44,12 @@ const StudentListComponent = () => {
     });
   };
 
-  useEffect(() => {
-    showToast({
-      type: "failure",
-      title: "Successs",
-      duration: 100000,
-      description: "This is a success message!",
+  const handleCreateStudent = () => {
+    setStudentListSearchQuery({
+      ...studentListSearchQuery,
+      refetchStudentList: true,
     });
-  }, []);
+  };
 
   return (
     <div>
@@ -71,7 +69,6 @@ const StudentListComponent = () => {
           setStudentListSearchQuery={setStudentListSearchQuery}
         />
         <StudentListContainer studentListSearchQuery={studentListSearchQuery} />
-
         <Pagination
           currentPage={studentListSearchQuery.pageNumber}
           totalPages={TOTOAL_PAGE}
@@ -83,6 +80,7 @@ const StudentListComponent = () => {
         <CreateStudentModal
           opened={createModalOpened}
           onCancel={handleCancelCreate}
+          onCreateStudent={handleCreateStudent}
         />
       )}
       {ToastComponent}
