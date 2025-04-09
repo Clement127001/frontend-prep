@@ -4,7 +4,7 @@ import { Plus } from "lucide-react";
 import StudentListContainer from "@/components/StudentListContainer";
 import StudentSearch from "@/components/StudentSearch";
 import { useQueryState } from "@/hooks/useQueryState";
-import { StudentListSearchQueryType } from "@/types/studentList";
+import { StudentListSearchQueryType } from "@/types/student";
 import HomeModule from "@/styles/Home.module.css";
 import Pagination from "@/components/Pagination";
 // import useToast from "@/hooks/useToast";

@@ -1,4 +1,4 @@
-import { CourseTypeEnum } from "@/types/studentList";
+import { CourseTypeEnum } from "@/types/student";
 
 const StudentTab = ({ activeTab }: { activeTab: CourseTypeEnum }) => {
   switch (activeTab) {

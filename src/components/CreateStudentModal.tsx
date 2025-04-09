@@ -1,7 +1,7 @@
 import Modal from "@/components/Modals/Modal";
 import CreateStudent from "@/components/form/StudentForm";
 import { useToast } from "@/context/ToastProvider";
-import { CreateStudentType } from "@/types/studentList";
+import { CreateStudentType } from "@/types/student";
 import { defaultStudentValues } from "@/utils/data";
 
 const CreateStudentModal = ({

@@ -2,11 +2,9 @@ import { memo, useCallback, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import useDebounce from "@/hooks/useDebounce";
 import { studentList as studentData } from "@/utils/data";
-import {
-  CreateStudentType,
-  StudentListSearchQueryType,
-} from "@/types/studentList";
+import { CreateStudentType, StudentListSearchQueryType } from "@/types/student";
 import StudentList from "@/components/StudentList";
+import { useToast } from "@/context/ToastProvider";
 
 const EditStudentModal = dynamic(
   () => import("@/components/EditStudentModal").then((mod) => mod.default),
@@ -31,14 +29,14 @@ const StudentListContainer = memo(
     // const [studentList, setStudentList] = useState<StudentType[] | null>(
     //   studentData
     // );
-
-    const { searchText, refetchStudentList, pageNumber } =
-      studentListSearchQuery;
-
+    const { showToast } = useToast();
     const [editId, setEditId] = useState<string | null>(null);
     const [deleteId, setDeleteId] = useState<string | null>(null);
     const [editModalOpened, setEditModalOpened] = useState<boolean>(false);
     const [deleteModalOpened, setDeleteModalOpened] = useState<boolean>(false);
+
+    const { searchText, refetchStudentList, pageNumber } =
+      studentListSearchQuery;
 
     const debouncedSearchText = useDebounce(searchText, 300);
 
@@ -84,18 +82,25 @@ const StudentListContainer = memo(
     // };
 
     const handleEditStudent = async (data: CreateStudentType) => {
-      try {
-        await fetch("http://localchost:3000/student", {
-          method: "PATCH",
-          headers: {
-            contentType: "application/json",
-          },
-          body: JSON.stringify(data),
-        });
-        // fetchUserList();
-      } catch (err) {
-        console.log(data);
-      }
+      // try {
+      //   await fetch("http://localchost:3000/student", {
+      //     method: "PATCH",
+      //     headers: {
+      //       contentType: "application/json",
+      //     },
+      //     body: JSON.stringify(data),
+      //   });
+      //   // fetchUserList();
+      // } catch (err) {
+      //   console.log(data);
+      // }
+
+      showToast({
+        description: "Student data edited succesfully",
+        title: "Success!",
+        position: "top-right",
+        type: "success",
+      });
 
       onCancelEdit();
     };

@@ -36,3 +36,9 @@
   font-weight: 500;
   cursor: pointer;
 }
+
+.error {
+  font-size: 13px;
+  color: rgb(254, 45, 45);
+  margin-bottom: 12px;
+}

@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { StudentType } from "@/types/studentList";
+import { StudentType } from "@/types/student";
 import { Edit, Trash2 } from "lucide-react";
 import HomeModule from "@/styles/Home.module.css";
 

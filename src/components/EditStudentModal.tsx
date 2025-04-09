@@ -1,4 +1,4 @@
-import { CreateStudentType } from "@/types/studentList";
+import { CreateStudentType } from "@/types/student";
 import EditStudent from "@/components/form/EditStudent";
 import Modal from "@/components/Modals/Modal";
 

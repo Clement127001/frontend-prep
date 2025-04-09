@@ -1,6 +1,6 @@
 import StudentTab from "@/components/studentTab/StudentTab";
 import { useQueryState } from "@/hooks/useQueryState";
-import { CourseTypeEnum } from "@/types/studentList";
+import { CourseTypeEnum } from "@/types/student";
 import Styles from "@/styles/StudentTabs.module.css";
 
 const StudentTabsContiner = () => {

@@ -1,4 +1,4 @@
-import { CourseTypeEnum, CreateStudentType } from "@/types/studentList";
+import { CourseTypeEnum, CreateStudentType } from "@/types/student";
 
 export const studentList = [
   {

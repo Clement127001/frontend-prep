@@ -1,4 +1,4 @@
-import { StudentListSearchQueryType } from "@/types/studentList";
+import { StudentListSearchQueryType } from "@/types/student";
 
 const StudentSearch = ({
   studentListSearchQuery,

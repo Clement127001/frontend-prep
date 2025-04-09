@@ -1,6 +1,7 @@
-import { FormEvent, useMemo, useState } from "react";
+import { useMemo } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import CreateStudentStyle from "@/styles/CreateStudent.module.css";
-import { CourseTypeEnum, CreateStudentType } from "@/types/studentList";
+import { CourseTypeEnum, CreateStudentType } from "@/types/student";
 
 const StudentForm = ({
   studentFormValues,
@@ -9,78 +10,97 @@ const StudentForm = ({
   studentFormValues: CreateStudentType;
   handleSubmit: (data: CreateStudentType) => void;
 }) => {
-  const [firstname, setFirstname] = useState<string>(
-    studentFormValues.firstname
-  );
-  const [lastname, setLastname] = useState<string>(studentFormValues.lastname);
-  const [dateOfJoin, setDateOfJoin] = useState<string>(
-    studentFormValues.dateOfJoin
-  );
-  const [courseType, setCourseType] = useState<CourseTypeEnum>(
-    studentFormValues.courseType
-  );
+  const studentForm = useForm<CreateStudentType>({
+    mode: "onSubmit",
+    defaultValues: studentFormValues,
+  });
+
+  const {
+    register,
+    handleSubmit: handleFormSubmit,
+    formState: { errors },
+  } = studentForm;
 
   const maxDate = useMemo(() => new Date().toISOString().split("T")[0], []);
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    handleSubmit({ firstname, lastname, dateOfJoin, courseType, imageUrl: "" });
+  const onSubmit: SubmitHandler<CreateStudentType> = (data) => {
+    handleSubmit(data);
   };
 
   return (
     <form
-      onSubmit={(e) => onSubmit(e)}
+      onSubmit={handleFormSubmit(onSubmit)}
       className={CreateStudentStyle.container}
     >
       <div className={CreateStudentStyle.inputContainer}>
         <label htmlFor="firstname">Firstname</label>
         <input
           id="firstname"
-          name="firstname"
-          value={firstname}
-          required
-          minLength={4}
-          onChange={(e) => setFirstname(e.target.value)}
           placeholder="Enter first name"
+          {...register("firstname", {
+            required: "Firstname is required",
+            minLength: {
+              value: 4,
+              message: "Firstname should have 4 character atmost",
+            },
+          })}
         />
+        {errors.firstname && (
+          <p className={CreateStudentStyle.error}>{errors.firstname.message}</p>
+        )}
       </div>
 
       <div className={CreateStudentStyle.inputContainer}>
         <label htmlFor="lastname">Lastname</label>
         <input
           id="lastname"
-          name="lastname"
-          value={lastname}
-          required
-          minLength={1}
-          onChange={(e) => setLastname(e.target.value)}
-          placeholder="Enter first name"
+          placeholder="Enter last name"
+          {...register("lastname", {
+            required: "Lastname is required",
+            minLength: {
+              value: 4,
+              message: "Lastname should have 4 character atmost",
+            },
+          })}
         />
+
+        {errors.lastname && (
+          <p className={CreateStudentStyle.error}>{errors.lastname.message}</p>
+        )}
       </div>
 
       <div className={CreateStudentStyle.inputContainer}>
         <label>Course Type</label>
         <select
           id="courseType"
-          name="courseType"
-          value={courseType}
-          onChange={(e) => setCourseType(e.target.value as CourseTypeEnum)}
+          {...register("courseType", { required: "Course type is required" })}
         >
           <option value={CourseTypeEnum.UG}>UG</option>
           <option value={CourseTypeEnum.PG}>PG</option>
         </select>
+
+        {errors.courseType && (
+          <p className={CreateStudentStyle.error}>
+            {errors.courseType.message}
+          </p>
+        )}
       </div>
 
       <div className={CreateStudentStyle.inputContainer}>
         <label htmlFor="dateOfJoin">Date of Joining</label>
         <input
           id="dateOfJoin"
-          name="dateOfJoin"
           type="date"
           max={maxDate}
-          value={dateOfJoin}
-          onChange={(e) => setDateOfJoin(e.target.value)}
+          {...register("dateOfJoin", {
+            required: "Date of Joining is required",
+          })}
         />
+        {errors.dateOfJoin && (
+          <p className={CreateStudentStyle.error}>
+            {errors.dateOfJoin.message}
+          </p>
+        )}
       </div>
 
       <button className={CreateStudentStyle.createButton}>Save</button>
