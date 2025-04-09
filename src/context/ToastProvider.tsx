@@ -18,16 +18,12 @@ const ToastContext = createContext<ToastContextType>({
 const ToastProvider = ({ children }: { children: ReactNode }) => {
   const [toastData, setToastData] = useState<ToastData | null>(null);
 
-  const onCloseToast = () => {
-    setToastData(null);
-  };
-
   const showToast = useCallback((toastProps: ToastData) => {
     let timer;
     if (timer) clearTimeout(timer);
     setToastData(toastProps);
     timer = setTimeout(() => {
-      onCloseToast();
+      hideToast();
     }, toastProps.duration ?? 3000);
   }, []);
 
