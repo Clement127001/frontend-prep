@@ -1,0 +1,45 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 340px;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.inputContainer label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.inputContainer input,
+.inputContainer select {
+  font-size: 14px;
+  min-height: 36px;
+  padding-left: 10px;
+  outline: none;
+  border-radius: 6px;
+  color: #000;
+  font-weight: 600;
+}
+
+.formAction {
+  align-self: flex-end;
+  width: fit-content;
+  background-color: green;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.error {
+  font-size: 13px;
+  color: rgb(254, 45, 45);
+  margin-bottom: 12px;
+}

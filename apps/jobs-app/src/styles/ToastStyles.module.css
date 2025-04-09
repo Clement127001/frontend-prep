@@ -1,0 +1,105 @@
+.toast {
+  padding: 15px;
+  margin: 10px;
+  color: white;
+  display: flex;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  font-family: sans-serif;
+}
+
+.success {
+  background-color: #4caf50;
+}
+.info {
+  background-color: #2196f3;
+}
+.warning {
+  background-color: #ff9800;
+}
+.failure {
+  background-color: #f44336;
+}
+
+.closeBtn {
+  margin-left: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.top-right {
+  position: fixed;
+  top: 20px;
+  right: 200px;
+}
+
+.top-left {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+}
+
+.bottom-right {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.bottom-left {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+}
+
+.top-left > .toast {
+  animation: slideInFromLeft 200ms forwards;
+}
+
+.top-right > .toast {
+  animation: slideInFromRight 200ms forwards;
+}
+
+.bottom-left > .toast {
+  animation: slideFromBottom 200ms forwards;
+}
+
+.bottom-right > .toast {
+  animation: slideFromBottom 200ms forwards;
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-200px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(400px);
+  }
+  to {
+    transform: translate(200px);
+  }
+}
+
+@keyframes slideFromBottom {
+  from {
+    transform: translateY(200px);
+  }
+  to {
+    transform: translateY(20px);
+  }
+}
+
+@keyframes slideFromTop {
+  from {
+    transform: translateY(-200px);
+  }
+  to {
+    transform: translateY(20px);
+  }
+}
