@@ -1,7 +1,6 @@
-import { StudentType } from "@/types/student";
 import { useEffect, useState } from "react";
 import StudentForm from "@/components/form/StudentForm";
-import { CreateStudentType } from "@/types/student";
+import { CreateStudentType, StudentType } from "@/types/student";
 import { studentList } from "@/utils/data";
 
 const EditStudent = ({

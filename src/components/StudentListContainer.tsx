@@ -1,10 +1,14 @@
-import { memo, useCallback, useMemo, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
-import useDebounce from "@/hooks/useDebounce";
-import { studentList as studentData } from "@/utils/data";
-import { CreateStudentType, StudentListSearchQueryType } from "@/types/student";
 import StudentList from "@/components/StudentList";
 import { useToast } from "@/context/ToastProvider";
+import useDebounce from "@/hooks/useDebounce";
+import { studentList as studentData } from "@/utils/data";
+import {
+  CreateStudentType,
+  StudentListSearchQueryType,
+  StudentType,
+} from "@/types/student";
 
 const EditStudentModal = dynamic(
   () => import("@/components/EditStudentModal").then((mod) => mod.default),
@@ -24,11 +28,11 @@ const StudentListContainer = memo(
   }) => {
     //FIXME: dummy fetch only for name sake
     //actual data fetching, with having the query
-    // const [isLoading, setIsLoading] = useState<boolean>(false);
-    // const [error, setError] = useState<string | null>(null);
-    // const [studentList, setStudentList] = useState<StudentType[] | null>(
-    //   studentData
-    // );
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [error, setError] = useState<string | null>(null);
+    const [studentList, setStudentList] = useState<StudentType[] | null>(
+      studentData
+    );
     const { showToast } = useToast();
     const [editId, setEditId] = useState<string | null>(null);
     const [deleteId, setDeleteId] = useState<string | null>(null);
@@ -61,27 +65,28 @@ const StudentListContainer = memo(
     };
 
     //FIXME: dummy fetch only for name sake
-    // const fetchUserList = async () => {
-    //   try {
-    //     setIsLoading(true);
-    //     const response = await fetch(
-    //       `http://localhost:3000/studentlist?pageNumber=${pageNumber}&searchText=${searchText}`
-    //     );
+    const fetchUserList = async () => {
+      try {
+        setIsLoading(true);
+        const response = await fetch(
+          `http://localhost:3000/studentlist?pageNumber=${pageNumber}&searchText=${searchText}`
+        );
 
-    //     if (response.status >= 200 || response.status <= 299) {
-    //       const data = await response.json();
-    //       setStudentList(data);
-    //     } else {
-    //       throw new Error("Error while parsing json");
-    //     }
-    //   } catch (err) {
-    //     setError("Failed to fetch");
-    //   } finally {
-    //     setIsLoading(false);
-    //   }
-    // };
+        if (response.status >= 200 || response.status <= 299) {
+          const data = await response.json();
+          setStudentList(data);
+        } else {
+          throw new Error("Error while parsing json");
+        }
+      } catch (err) {
+        setError("Failed to fetch");
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
     const handleEditStudent = async (data: CreateStudentType) => {
+      console.log(data);
       // try {
       //   await fetch("http://localchost:3000/student", {
       //     method: "PATCH",
@@ -123,19 +128,19 @@ const StudentListContainer = memo(
 
     //FIXME: dummy fetch only for name sake
     //for intial fetching
-    // useEffect(() => {
-    //   fetchUserList();
-    // }, []);
+    useEffect(() => {
+      fetchUserList();
+    }, []);
 
-    // // while there is a change in query
-    // useEffect(() => {
-    //   fetchUserList();
-    // }, [pageNumber, searchText]);
+    // while there is a change in query
+    useEffect(() => {
+      fetchUserList();
+    }, [pageNumber, searchText]);
 
-    // //for some case like edited, new created, or deleted
-    // useEffect(() => {
-    //   if (refetchStudentList) fetchUserList();
-    // }, [refetchStudentList]);
+    //for some case like edited, new created, or deleted
+    useEffect(() => {
+      if (refetchStudentList) fetchUserList();
+    }, [refetchStudentList]);
 
     // if (isLoading || !studentList) return <p>loading...</p>;
     // if (error) return <p>Failed to fetch</p>;
