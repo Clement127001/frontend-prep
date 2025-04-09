@@ -1,5 +1,5 @@
 import { UserLogin } from "@/types/login";
-import React from "react";
+import React, { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Styles from "@/styles/register.module.css";
 import { useToast } from "@/context/ToastProvider";
@@ -7,9 +7,11 @@ import { apiUrl } from "@/utils/common";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { emailRegex } from "@/utils/register";
+import { usePageLoader } from "@/context/PageLoaderProvider";
 
 const LoginForm = () => {
   const { showToast } = useToast();
+  const { showPageLoader, hidepageLoader } = usePageLoader();
   const router = useRouter();
   const loginForm = useForm<UserLogin>({
     mode: "onSubmit",
@@ -23,6 +25,8 @@ const LoginForm = () => {
   } = loginForm;
 
   const onLogin: SubmitHandler<UserLogin> = async (data) => {
+    showPageLoader("Logging In, please wait");
+
     try {
       const response = await fetch(apiUrl + "auth/login", {
         method: "POST",
@@ -60,6 +64,8 @@ const LoginForm = () => {
         position: "top-right",
         type: "failure",
       });
+    } finally {
+      hidepageLoader();
     }
   };
 

@@ -1,10 +1,10 @@
-import LoginForm from "@/components/login/LoginForm";
-import RegisterForm from "@/components/register/RegisterForm";
-import { useToast } from "@/context/ToastProvider";
+import { useEffect } from "react";
+import Cookies from "js-cookie";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import LoginForm from "@/components/login/LoginForm";
+import { useToast } from "@/context/ToastProvider";
 
 export default function Register() {
   const router = useRouter();
@@ -24,6 +24,8 @@ export default function Register() {
         description: "Please login to visit jobs",
         type: "warning",
       });
+
+      Cookies.remove("userToken");
     }
 
     delete query.ua;
