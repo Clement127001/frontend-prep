@@ -11,4 +11,11 @@ export type ToastData = {
   description: string;
   duration?: number;
   type: ToastType;
+  position: ToastPostion;
+};
+
+export type ToastContextType = {
+  toastData: ToastData | null;
+  showToast: (toastProps: ToastData) => void;
+  hideToast: () => void;
 };

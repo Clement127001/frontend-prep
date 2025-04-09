@@ -7,7 +7,7 @@ import { useQueryState } from "@/hooks/useQueryState";
 import { StudentListSearchQueryType } from "@/types/studentList";
 import HomeModule from "@/styles/Home.module.css";
 import Pagination from "@/components/Pagination";
-import useToast from "@/hooks/useToast";
+// import useToast from "@/hooks/useToast";
 import StudentTabsContiner from "@/components/studentTab/StudentTabsContainer";
 
 //TODO: remove the dummy value
@@ -26,7 +26,7 @@ const StudentListComponent = () => {
       refetchStudentList: false,
     });
 
-  const { ToastComponent } = useToast({ position: "bottom-right" });
+  // const { ToastComponent } = useToast({ position: "bottom-right" });
 
   const [createModalOpened, setCreateModalOpened] = useState<boolean>(false);
 
@@ -86,7 +86,7 @@ const StudentListComponent = () => {
           onCreateStudent={handleCreateStudent}
         />
       )}
-      {ToastComponent}
+      {/* {ToastComponent} */}
     </div>
   );
 };

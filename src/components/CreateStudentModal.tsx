@@ -1,5 +1,6 @@
 import Modal from "@/components/Modals/Modal";
 import CreateStudent from "@/components/form/StudentForm";
+import { useToast } from "@/context/ToastProvider";
 import { CreateStudentType } from "@/types/studentList";
 import { defaultStudentValues } from "@/utils/data";
 
@@ -12,10 +13,19 @@ const CreateStudentModal = ({
   onCancel: () => void;
   onCreateStudent: () => void;
 }) => {
+  const { showToast } = useToast();
+
   const handleAddSubmit = (data: CreateStudentType) => {
     console.log(data);
     onCancel();
     onCreateStudent();
+
+    showToast({
+      description: "Student added succesfully",
+      title: "Success",
+      position: "top-right",
+      type: "success",
+    });
   };
 
   return (
